@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://d304dq1w1fwjg"]
+[gd_scene load_steps=3 format=3 uid="uid://d304dq1w1fwjg"]
+
+[ext_resource type="PackedScene" uid="uid://q72ga1h15ib7" path="res://cube.tscn" id="1_7uj88"]
+[ext_resource type="Script" path="res://src/Paddle.cs" id="2_wkv64"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="left_paddle" parent="." instance=ExtResource("1_7uj88")]
+position = Vector2(10, 351)
+script = ExtResource("2_wkv64")
+
+[node name="right_paddle" parent="." instance=ExtResource("1_7uj88")]
+position = Vector2(1142, 394)
+script = ExtResource("2_wkv64")
+up_keybind = "right_up"
+down_keybind = "right_down"
