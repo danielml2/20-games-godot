@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://q72ga1h15ib7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6jfw"]
-size = Vector2(1, 1)
+size = Vector2(20, 80)
 
 [sub_resource type="QuadMesh" id="QuadMesh_rjdrb"]
 size = Vector2(20, 80)

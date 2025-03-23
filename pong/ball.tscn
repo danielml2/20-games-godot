@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4rfri2slw2la"]
+
+[ext_resource type="Script" path="res://src/Ball.cs" id="1_8074y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6jfw"]
+size = Vector2(25, 25)
+
+[sub_resource type="QuadMesh" id="QuadMesh_rjdrb"]
+size = Vector2(25, 25)
+
+[sub_resource type="Gradient" id="Gradient_r6fkh"]
+colors = PackedColorArray(0.827451, 0.294118, 0.372549, 1, 0.827451, 0.294118, 0.372549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tagwc"]
+gradient = SubResource("Gradient_r6fkh")
+width = 25
+height = 25
+
+[node name="RigidBody2D" type="Area2D"]
+script = ExtResource("1_8074y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a6jfw")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_rjdrb")
+texture = SubResource("GradientTexture2D_tagwc")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

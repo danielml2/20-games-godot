@@ -26,7 +26,6 @@ public partial class Paddle : Node2D
 	{
 		
 		var direction = Input.GetVector("ignore","ignore",up_keybind,down_keybind);
-		
 		Position += direction.Normalized() * speed * (float)delta;
 		
 		Position = new Vector2(

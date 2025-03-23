@@ -1,16 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://d304dq1w1fwjg"]
+[gd_scene load_steps=6 format=3 uid="uid://d304dq1w1fwjg"]
 
-[ext_resource type="PackedScene" uid="uid://q72ga1h15ib7" path="res://cube.tscn" id="1_7uj88"]
+[ext_resource type="PackedScene" uid="uid://q72ga1h15ib7" path="res://paddle.tscn" id="1_7uj88"]
 [ext_resource type="Script" path="res://src/Paddle.cs" id="2_wkv64"]
+[ext_resource type="PackedScene" uid="uid://c4rfri2slw2la" path="res://ball.tscn" id="3_cbb70"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tr38i"]
+size = Vector2(1174, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fltl6"]
+size = Vector2(1337.13, 106.072)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="left_paddle" parent="." instance=ExtResource("1_7uj88")]
-position = Vector2(10, 351)
+position = Vector2(10, 324)
 script = ExtResource("2_wkv64")
+metadata/reflect_x = true
 
 [node name="right_paddle" parent="." instance=ExtResource("1_7uj88")]
-position = Vector2(1142, 394)
+position = Vector2(1142, 324)
 script = ExtResource("2_wkv64")
 up_keybind = "right_up"
 down_keybind = "right_down"
+metadata/reflect_x = true
+
+[node name="RigidBody2D" parent="." instance=ExtResource("3_cbb70")]
+position = Vector2(5, 0)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(4, 646)
+metadata/reflect_y = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(583, 13)
+shape = SubResource("RectangleShape2D_tr38i")
+
+[node name="Roof" type="StaticBody2D" parent="."]
+metadata/reflect_y = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Roof"]
+position = Vector2(576, -12)
+shape = SubResource("RectangleShape2D_tr38i")
+
+[node name="Left BoundingBox" type="StaticBody2D" parent="."]
+position = Vector2(-42, 5)
+rotation = 1.57332
+scale = Vector2(0.5, 3.9)
+metadata/goal_side = "Left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left BoundingBox"]
+position = Vector2(616.83, 42.1084)
+shape = SubResource("RectangleShape2D_fltl6")
+
+[node name="Right Bounding Box" type="StaticBody2D" parent="."]
+position = Vector2(-42, 5)
+rotation = 1.57332
+scale = Vector2(0.5, 3.9)
+metadata/goal_side = "Right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Bounding Box"]
+position = Vector2(655.312, -360.214)
+shape = SubResource("RectangleShape2D_fltl6")
