@@ -28,8 +28,27 @@ public partial class GameManager : Node2D
 		else 
 			leftScore++;	
 
+		if(leftScore == 5 || rightScore == 5) {
+			GameOver();
+		} else {
+			leftLabel.Text = leftScore + "";	   				
+			rightLabel.Text = rightScore + "";	 
+		}  				
+	}
+
+
+	public async void GameOver() {
+		leftLabel.Text = leftScore == 5 ? "5 Left wins!" : leftScore + "";
+		rightLabel.Text = rightScore == 5 ? "5 Right wins!" : rightScore + "";
+
+		ballReference.setFreeze(true);
+		await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(3000));
+		leftScore = 0;
+		rightScore = 0;
 		leftLabel.Text = leftScore + "";	   				
-		rightLabel.Text = rightScore + "";	   				
+		rightLabel.Text = rightScore + "";
+		ballReference.setFreeze(false);
+
 	}
 
 

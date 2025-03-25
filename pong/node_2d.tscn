@@ -76,18 +76,20 @@ offset_right = 914.0
 offset_bottom = 86.0
 
 [node name="right_score_text" type="Label" parent="UI"]
-offset_right = 36.0
-offset_bottom = 83.0
+offset_left = -57.0
+offset_top = -5.0
+offset_right = -21.0
+offset_bottom = 78.0
 scale = Vector2(1.3, 1.4)
 theme_override_font_sizes/font_size = 40
 text = "0
 "
 
 [node name="left_score_text" type="Label" parent="UI"]
-offset_left = -625.0
-offset_top = 13.0
-offset_right = -589.0
-offset_bottom = 96.0
+offset_left = -571.0
+offset_top = 0.999996
+offset_right = -535.0
+offset_bottom = 84.0
 scale = Vector2(1.3, 1.4)
 theme_override_font_sizes/font_size = 40
 text = "0

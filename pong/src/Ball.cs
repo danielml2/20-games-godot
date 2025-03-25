@@ -14,6 +14,8 @@ public partial class Ball : Area2D
 	private Random random = new Random();
 	public Vector2 direction = Vector2.Right;
 
+	private bool freeze = false;
+
 	private Vector2 ScreenSize;
 	private Vector2 CENTER = new Vector2(576,324);
 	private float speedMult = 1;
@@ -26,11 +28,13 @@ public partial class Ball : Area2D
 	}
     public override void _PhysicsProcess(double delta)
     {
-        Position += direction * (float)delta * speed * speedMult;
-		Position = new Vector2(
-			x: Mathf.Clamp(Position.X, -20, ScreenSize.X + 20),
-			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-		);
+		if(!freeze) {
+			Position += direction * (float)delta * speed * speedMult;
+			Position = new Vector2(
+				x: Mathf.Clamp(Position.X, -20, ScreenSize.X + 20),
+				y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
+			);
+		}
     }
 
     private void OnBodyEntered(Node2D body)
@@ -65,6 +69,9 @@ public partial class Ball : Area2D
 			speedMult = 1;
 	}
 
+	public void setFreeze(bool freeze) {
+		this.freeze = freeze;
+	}
 
     [Signal]
 	public delegate void ScoreEventHandler(String side);
