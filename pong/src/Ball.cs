@@ -19,14 +19,6 @@ public partial class Ball : Area2D
 		ScreenSize = GetViewportRect().Size;
 		Console.WriteLine(ScreenSize);
 	}
-
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-
-	}
-
     public override void _PhysicsProcess(double delta)
     {
         Position += direction * (float)delta * speed;
@@ -34,8 +26,6 @@ public partial class Ball : Area2D
 			x: Mathf.Clamp(Position.X, -20, ScreenSize.X + 20),
 			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
 		);
-		// Debug.WriteLine("position:" + Position);
-		// Debug.WriteLine("velocity:" + velocity);
     }
 
     private void OnBodyEntered(Node2D body)
@@ -44,11 +34,9 @@ public partial class Ball : Area2D
 		Debug.WriteLine("COLLISION!!!");
 		if (reflect_y)
 		{
-			// velocity = new Vector2(velocity.X, -velocity.Y);
 			var angle = (float)random.NextDouble() * 45;
 			Debug.WriteLine($"collision angle: {angle}");
 			direction = new Vector2(direction.X, -direction.Y);
-			// velocity = velocity.Reflect(body.GetTransform().Y);
 		}
 
 		var reflect_x = body.HasMeta("reflect_x") && body.GetMeta("reflect_x").AsBool();
@@ -61,6 +49,7 @@ public partial class Ball : Area2D
 
 		var isGoal = body.HasMeta("goal_side") ? body.GetMeta("goal_side").AsString() : "";
 		if(isGoal != "") {
+			EmitSignal(SignalName.Score, body.GetMeta("goal_side"));
 			ResetPosition();
 		}
 
@@ -71,6 +60,10 @@ public partial class Ball : Area2D
 			direction = new Vector2((float)random.NextDouble() > 0.5 ? -1 : 1, (float)random.NextDouble() * 2 - 1);
 			direction = direction.Normalized();
 	}
+
+
+    [Signal]
+	public delegate void ScoreEventHandler(String side);
 
 
 
