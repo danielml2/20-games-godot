@@ -6,12 +6,17 @@ public partial class Ball : Area2D
 {
 	[Export]
 	public int speed = 400;
+	[Export]
+	public float maxSpeedMult = 1.5f;
+	[Export]
+	public float speedMultIncrease = 0.10f;
 
 	private Random random = new Random();
 	public Vector2 direction = Vector2.Right;
 
 	private Vector2 ScreenSize;
 	private Vector2 CENTER = new Vector2(576,324);
+	private float speedMult = 1;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -21,7 +26,7 @@ public partial class Ball : Area2D
 	}
     public override void _PhysicsProcess(double delta)
     {
-        Position += direction * (float)delta * speed;
+        Position += direction * (float)delta * speed * speedMult;
 		Position = new Vector2(
 			x: Mathf.Clamp(Position.X, -20, ScreenSize.X + 20),
 			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
@@ -31,11 +36,8 @@ public partial class Ball : Area2D
     private void OnBodyEntered(Node2D body)
 	{
 		var reflect_y = body.HasMeta("reflect_y") && body.GetMeta("reflect_y").AsBool();
-		Debug.WriteLine("COLLISION!!!");
 		if (reflect_y)
 		{
-			var angle = (float)random.NextDouble() * 45;
-			Debug.WriteLine($"collision angle: {angle}");
 			direction = new Vector2(direction.X, -direction.Y);
 		}
 
@@ -45,6 +47,7 @@ public partial class Ball : Area2D
 		{
 			direction = new Vector2(-direction.X, (float)random.NextDouble() * 2 - 1);
 			direction = direction.Normalized();
+			speedMult += speedMultIncrease;
 		}
 
 		var isGoal = body.HasMeta("goal_side") ? body.GetMeta("goal_side").AsString() : "";
@@ -57,8 +60,9 @@ public partial class Ball : Area2D
 
 	public void ResetPosition() {
 			Position = CENTER;
-			direction = new Vector2((float)random.NextDouble() > 0.5 ? -1 : 1, (float)random.NextDouble() * 2 - 1);
+			direction = new Vector2((float)random.NextDouble() > 0.5 ? -1 : 1, 0);
 			direction = direction.Normalized();
+			speedMult = 1;
 	}
 
 

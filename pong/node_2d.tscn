@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d304dq1w1fwjg"]
+[gd_scene load_steps=7 format=3 uid="uid://d304dq1w1fwjg"]
 
 [ext_resource type="PackedScene" uid="uid://q72ga1h15ib7" path="res://paddle.tscn" id="1_7uj88"]
 [ext_resource type="Script" path="res://src/GameManager.cs" id="1_j2fx1"]
 [ext_resource type="Script" path="res://src/Paddle.cs" id="2_wkv64"]
 [ext_resource type="PackedScene" uid="uid://c4rfri2slw2la" path="res://ball.tscn" id="3_cbb70"]
-[ext_resource type="PackedScene" uid="uid://c633eo4nqmyhw" path="res://ui.tscn" id="5_53tyq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tr38i"]
 size = Vector2(1174, 20)
@@ -15,8 +14,8 @@ size = Vector2(1337.13, 106.072)
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("ballReference", "rightLabel", "leftLabel")]
 script = ExtResource("1_j2fx1")
 ballReference = NodePath("Ball")
-rightLabel = NodePath("Control/right_score_text")
-leftLabel = NodePath("Control/left_score_text")
+rightLabel = NodePath("UI/right_score_text")
+leftLabel = NodePath("UI/left_score_text")
 
 [node name="left_paddle" parent="." instance=ExtResource("1_7uj88")]
 position = Vector2(10, 324)
@@ -68,23 +67,27 @@ metadata/goal_side = "Right"
 position = Vector2(655.312, -360.214)
 shape = SubResource("RectangleShape2D_fltl6")
 
-[node name="Control" parent="." instance=ExtResource("5_53tyq")]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 874.0
+offset_top = 46.0
+offset_right = 914.0
+offset_bottom = 86.0
 
-[node name="left_score_text" type="Label" parent="Control"]
-offset_left = 249.0
-offset_top = 59.0
-offset_right = 285.0
-offset_bottom = 142.0
+[node name="right_score_text" type="Label" parent="UI"]
+offset_right = 36.0
+offset_bottom = 83.0
 scale = Vector2(1.3, 1.4)
 theme_override_font_sizes/font_size = 40
 text = "0
 "
 
-[node name="right_score_text" type="Label" parent="Control"]
-offset_left = 874.0
-offset_top = 46.0
-offset_right = 910.0
-offset_bottom = 129.0
+[node name="left_score_text" type="Label" parent="UI"]
+offset_left = -625.0
+offset_top = 13.0
+offset_right = -589.0
+offset_bottom = 96.0
 scale = Vector2(1.3, 1.4)
 theme_override_font_sizes/font_size = 40
 text = "0
