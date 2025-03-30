@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2hw2omvr7b6t"]
+[gd_scene load_steps=3 format=3 uid="uid://d2hw2omvr7b6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5xw4"]
+size = Vector2(37, 667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46e2m"]
 size = Vector2(1166, 29)
 
 [node name="Node2D" type="Node2D"]
+
+[node name="End zone" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="End zone"]
+position = Vector2(-35, 328)
+shape = SubResource("RectangleShape2D_x5xw4")
 
 [node name="Roof" type="StaticBody2D" parent="."]
 metadata/_edit_lock_ = true
