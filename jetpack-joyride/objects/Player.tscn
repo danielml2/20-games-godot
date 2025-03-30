@@ -1,13 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdcoqnsa4svyo"]
+[gd_scene load_steps=4 format=3 uid="uid://cdcoqnsa4svyo"]
+
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_o3dan"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_exdpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bp6rn"]
-size = Vector2(40, 40)
+size = Vector2(40, 41)
 
 [node name="Player" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Rigidbody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_exdpv")
+can_sleep = false
+lock_rotation = true
+continuous_cd = 2
+script = ExtResource("1_o3dan")
+upSpeed = 1800
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+[node name="ColorRect" type="ColorRect" parent="Rigidbody2D"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -21,5 +31,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.345098, 0.396078, 0.94902, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rigidbody2D"]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_bp6rn")
